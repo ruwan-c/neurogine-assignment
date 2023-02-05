@@ -6,18 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Home Page</title>
+    <title>Product Management</title>
 </head>
 <body class="m-4">
-<h1>Welcome to the Demo App</h1>
-<a class="h2" th:href="@{/first-question}">Question 01 - Answer</a><br/>
-<a class="h2" th:href="@{/second-question}">Question 02 - Answer</a><br/>
-<a class="h2" th:href="@{/products}">Question 03 - Answer</a><br/>
+<h2>Product Management</h2>
+<div class="m-2">
+<a type="button" class="btn btn-primary btn-sm" th:href="@{/products/new}">Add New Product</a><br>
+</div>
+<div class="m-2 ">
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <table class="table table-striped  table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="product : ${productList}">
+                <tr>
+                    <td>[[${product.id}]]</td>
+                    <td>[[${product.description}]]</td>
+                    <td>[[${product.price.toString()}]]</td>
+                    <td>
+                        <a type="button" class="btn btn-warning btn-sm m-1" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
+                        <a type="button" class="btn btn-danger btn-sm m-1"  th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
 
+                    </td>
+                </tr>
+            </th:block>
 
+        </tbody>
+    </table>
+</div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

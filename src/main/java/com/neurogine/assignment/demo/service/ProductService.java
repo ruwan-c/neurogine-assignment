@@ -14,14 +14,28 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     *
+     * @return List of all products
+     */
     public List<Product> listAll(){
         return (List<Product>) productRepository.findAll();
     }
 
+    /**
+     *
+     * @param product - new product to save
+     */
     public void save(Product product) {
         productRepository.save(product);
     }
 
+    /**
+     *
+     * @param id - id of a product
+     * @return - saved product with given id
+     * @throws ProductNotFoundException
+     */
     public Product get(Long id) throws ProductNotFoundException{
         Optional<Product> result = productRepository.findById(id);
         if (result.isPresent()){
@@ -31,6 +45,11 @@ public class ProductService {
         }
     }
 
+    /**
+     *
+     * @param id - id of a product to delete
+     * @throws ProductNotFoundException
+     */
     public void delete(Long id)  throws ProductNotFoundException{
         Long count=productRepository.countById(id);
         if(count ==null || count==0){
