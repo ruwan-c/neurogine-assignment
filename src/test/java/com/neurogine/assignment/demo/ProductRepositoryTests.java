@@ -24,8 +24,8 @@ public class ProductRepositoryTests {
 
     @Test
     @Order(1)
-    public void testAddNew(){
-        Product product=new Product();
+    public void testAddNew() {
+        Product product = new Product();
 //        product.setId(1L); auto increment start with 1
         product.setDescription("Test Laptop");
         product.setPrice(new BigDecimal(700.00));
@@ -37,32 +37,35 @@ public class ProductRepositoryTests {
 
     @Test
     @Order(2)
-    public void testListAll(){
+    public void testListAll() {
         Iterable<Product> products = productRepository.findAll();
         Assertions.assertThat(products).hasSizeGreaterThan(0);
 
     }
+
     @Test
     @Order(3)
-    public void testUpdate(){
+    public void testUpdate() {
         Optional<Product> optionalProductObj = productRepository.findById(1L);
         optionalProductObj.get().setDescription("Test Laptop Updated");
-        Product updatedObj=productRepository.save(optionalProductObj.get());
+        Product updatedObj = productRepository.save(optionalProductObj.get());
 
         Assertions.assertThat(updatedObj.getDescription()).isEqualTo("Test Laptop Updated");
 
     }
+
     @Test
     @Order(4)
-    public void testRead(){
+    public void testRead() {
         Optional<Product> optionalProductObj = productRepository.findById(1L);
         Assertions.assertThat(optionalProductObj.isPresent());
         System.out.println(optionalProductObj.get());
 
     }
+
     @Test
     @Order(5)
-    public void testDelete(){
+    public void testDelete() {
         productRepository.deleteById(1L);
 
         Optional<Product> optionlProduct = productRepository.findById(1L);
